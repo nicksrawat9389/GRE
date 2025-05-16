@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
-    <Folder Include="Interfaces\Repository\" />
+    <ProjectReference Include="..\GRE.Domain\GRE.Domain.csproj" />
+    <ProjectReference Include="..\GRE.Shared\GRE.Shared.csproj" />
   </ItemGroup>
 
 </Project>

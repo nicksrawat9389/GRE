@@ -8,5 +8,9 @@ namespace GRE.Shared.Messages
 {
     public class ErrorMessages
     {
+        public const string DataIsRequired = "Data is required.";
+        public const string InternalServerError = "Internal Server Error.";
+        public const string ProductNotFound = "Product Not Found.";
+        public const string InvalidProductData = "Invalid product data.";
     }
 }

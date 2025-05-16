@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.5" />
@@ -14,11 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GRE.Application\GRE.Application.csproj" />
+    <ProjectReference Include="..\GRE.Domain\GRE.Domain.csproj" />
   </ItemGroup>
 
 </Project>

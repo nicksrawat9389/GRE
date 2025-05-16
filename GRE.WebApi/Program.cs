@@ -1,4 +1,6 @@
+using AutoMapper;
 using GRE.Persistence;
+using GRE.Persistence.Implementations.Services.AutoMapper;
 using GRE.WebApi.Middleware;
 using Microsoft.Data.SqlClient;
 using Microsoft.OpenApi.Models;
@@ -16,6 +18,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddHttpClient();
 // Add services to the container.
@@ -39,6 +42,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 //});
 
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MapperProfileCongifuration());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

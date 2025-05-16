@@ -9,5 +9,8 @@ namespace GRE.Shared.Enums
     public enum StatusCodeEnum
     {
         Success = 200,
+        BadRequest = 400,
+        InternalServerError = 500,
+        NotFound = 404,
     }
 }
