@@ -1,5 +1,6 @@
 ﻿using GRE.Application.Interfaces.Services.Product;
-using GRE.Shared.DTOs;
+using GRE.Shared.DTOs.Product;
+using GRE.Shared.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,17 @@ namespace GRE.WebApi.Controllers.Products
             }
 
             return Ok(await _productService.DeleteProductAsync(productId));
+        }
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllProducts([FromBody] FilterModel filterModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _productService.GetAllProducts(filterModel));
         }
     }
 }

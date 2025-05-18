@@ -12,5 +12,11 @@ namespace GRE.Shared.Messages
         public const string InternalServerError = "Internal Server Error.";
         public const string ProductNotFound = "Product Not Found.";
         public const string InvalidProductData = "Invalid product data.";
+
+
+
+
+        public const string TerritoryNameRequired = "Territory name is required.";
+        public const string StoreDatarequired = "Store data is required.";
     }
 }

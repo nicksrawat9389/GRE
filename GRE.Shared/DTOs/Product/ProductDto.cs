@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GRE.Shared.DTOs
+namespace GRE.Shared.DTOs.Product
 {
     public class ProductDto
     {
@@ -19,5 +19,7 @@ namespace GRE.Shared.DTOs
         public int UnitsPerCase { get; set; } 
 
         public string UnitType { get; set; }
+        public decimal RetailerPrice { get; set; }
+        public decimal DistributorPrice { get; set; }
     }
 }

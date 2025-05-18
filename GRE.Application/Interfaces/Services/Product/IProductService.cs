@@ -1,4 +1,4 @@
-﻿using GRE.Shared.DTOs;
+﻿using GRE.Shared.DTOs.Product;
 using GRE.Shared.Model;
 using System;
 using System.Collections.Generic;
@@ -13,5 +13,6 @@ namespace GRE.Application.Interfaces.Services.Product
         Task<JsonModel> AddProductAsync(ProductDto productDto);
         Task<JsonModel> UpdateProductAsync(ProductDto productDto);
         Task<JsonModel> DeleteProductAsync(int productId);
+        Task<JsonModel> GetAllProducts(FilterModel filterModel);
     }
 }

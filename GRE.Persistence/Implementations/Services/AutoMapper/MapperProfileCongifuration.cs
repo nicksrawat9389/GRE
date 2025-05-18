@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GRE.Domain.Models.Product;
-using GRE.Shared.DTOs;
+using GRE.Domain.Models.Store;
+using GRE.Shared.DTOs.Product;
+using GRE.Shared.DTOs.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,9 @@ namespace GRE.Persistence.Implementations.Services.AutoMapper
         public MapperProfileCongifuration()
         {
             CreateMap<ProductDto, ProductModel>();
+            CreateMap<TerritoryDto, TerritoryModel>();
+            CreateMap<StoreDto, StoreModel>();
+
             
         }
     }

@@ -2,6 +2,7 @@
 using GRE.Application.Interfaces.Repository.Product;
 using GRE.Domain.Models.Product;
 using GRE.Shared.DTOs;
+using GRE.Shared.Model;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,10 @@ namespace GRE.Persistence.Implementations.Repository.Product
             parameters.Add("@UnitType", product.UnitType, DbType.String, ParameterDirection.Input);
             parameters.Add("@DateAdded", product.DateAdded == default ? DateTime.Now : product.DateAdded, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@DateLastUpdated", product.DateLastUpdated == default ? DateTime.Now : product.DateLastUpdated, DbType.DateTime, ParameterDirection.Input);
-            int result = await GetAsync<int>("USP_AddProduct", parameters, CommandType.StoredProcedure);
+            parameters.Add("@RetailerPrice", product.RetailerPrice, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("@DistributorPrice", product.DistributorPrice, DbType.Decimal, ParameterDirection.Input);
+
+            int result = await AddAsync("USP_AddProduct", parameters, CommandType.StoredProcedure);
             return result > 0;
         }
 
@@ -49,8 +53,9 @@ namespace GRE.Persistence.Implementations.Repository.Product
             parameters.Add("@UnitType", product.UnitType);
             parameters.Add("@IsActive", product.IsActive);
             parameters.Add("@IsDeleted", product.IsDeleted);
-
-            var result = await GetAsync<int>(
+            parameters.Add("@RetailerPrice", product.RetailerPrice, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("@DistributorPrice", product.DistributorPrice, DbType.Decimal, ParameterDirection.Input);
+            var result = await ExecuteAsync(
                 "USP_UpdateProduct", parameters, commandType: CommandType.StoredProcedure
             );
 
@@ -76,6 +81,19 @@ namespace GRE.Persistence.Implementations.Repository.Product
             );
 
             return result;
+        }
+
+        public async Task<List<ProductListing>> GetAllProducts(FilterModel filterModel)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@PageNumber", filterModel.PageNumber);
+            parameters.Add("@PageSize", filterModel.PageSize);
+            parameters.Add("@userClassification", filterModel.UserClassification);
+            parameters.Add("@productType", filterModel.ProductType);
+            var result = await QueryAsync<ProductListing>(
+                "USP_GetAllProducts", parameters, commandType: CommandType.StoredProcedure
+            );
+            return result.ToList();
         }
     }
 }

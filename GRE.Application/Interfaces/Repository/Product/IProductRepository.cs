@@ -1,4 +1,5 @@
 ﻿using GRE.Domain.Models.Product;
+using GRE.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace GRE.Application.Interfaces.Repository.Product
         Task<bool> UpdateProductAsync(ProductModel product);
         Task<bool> DeleteProductAsync(int productId);
         Task<bool> ProductExistAsync(int productId);
+        Task<List<ProductListing>> GetAllProducts(FilterModel filterModel);
     }
 }

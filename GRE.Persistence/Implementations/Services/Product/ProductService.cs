@@ -2,7 +2,7 @@
 using GRE.Application.Interfaces.Repository.Product;
 using GRE.Application.Interfaces.Services.Product;
 using GRE.Domain.Models.Product;
-using GRE.Shared.DTOs;
+using GRE.Shared.DTOs.Product;
 using GRE.Shared.Enums;
 using GRE.Shared.Messages;
 using GRE.Shared.Model;
@@ -126,6 +126,24 @@ namespace GRE.Persistence.Implementations.Services.Product
 
 
                 return response;
+        }
+
+        public async Task<JsonModel> GetAllProducts(FilterModel filterModel)
+        {
+            List<ProductListing> products = await _productRepository.GetAllProducts(filterModel);
+            if(products.Count == 0)
+            {
+                response.StatusCode= (int)StatusCodeEnum.Success;
+                response.Message = SuccessMessages.NoProductAvailable;
+                response.data = null;
+            }
+            else
+            {
+                response.StatusCode = (int)StatusCodeEnum.Success;
+                response.Message = SuccessMessages.ProductFetchedSuccessfully;
+                response.data = products;
+            }
+            return response;
         }
     }
 }

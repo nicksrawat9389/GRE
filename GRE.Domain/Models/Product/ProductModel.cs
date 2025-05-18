@@ -24,8 +24,16 @@ namespace GRE.Domain.Models.Product
 
         public string UnitType { get; set; }
 
+        public decimal RetailerPrice { get; set; }
+        public decimal DistributorPrice { get; set; }
+        public decimal ProductPrice { get; set; }
         public DateTime DateAdded { get; set; }
 
         public DateTime DateLastUpdated { get; set; }
+    }
+
+    public class ProductListing : ProductModel
+    {
+        public int TotalRecords { get; set; }
     }
 }
