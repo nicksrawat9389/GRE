@@ -17,6 +17,13 @@ namespace GRE.Shared.Messages
 
 
         public const string TerritoryNameRequired = "Territory name is required.";
+        public const string TerritoryDatarequired = "Territory data is required.";
+        public const string TerritoryNotFound = "Territory not found.";
+
+
+
         public const string StoreDatarequired = "Store data is required.";
-    }
+        public const string StoreNotFound = "Store not found.";
+        public const string StoreAndTerritoryNotFound = "Store and Territory not found.";
 }
+    }

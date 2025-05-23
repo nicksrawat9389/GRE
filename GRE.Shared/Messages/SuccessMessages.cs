@@ -17,8 +17,14 @@ namespace GRE.Shared.Messages
 
 
         public const string TerritoryAddedSuccessfully = "Territory added successfully";
-        public const string StoreAddedSuccessfully = "Store added successfully";
+        public const string TerritoryUpdatedSuccessfully = "Territory updated successfully";
+        public const string TerritoryDeletedSuccessfully = "Territory deleted successfully";
 
+
+
+        public const string StoreAddedSuccessfully = "Store added successfully";
+        public const string StoreUpdatedSuccessfully = "Store updated successfully";
+        public const string StoreDeletedSuccessfully = "Store deleted successfully";
     }
 
 }

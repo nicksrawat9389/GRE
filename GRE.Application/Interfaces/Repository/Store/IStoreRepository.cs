@@ -11,6 +11,12 @@ namespace GRE.Application.Interfaces.Repository.Store
     {
 
         Task<bool> CreateTerritory(TerritoryModel territoryModel);
-        Task<bool> AddStore(StoreModel storeModel); 
+        Task<bool> UpdateTerritory(TerritoryModel territoryModel);
+        Task<bool> DeleteTerritory(int territoryId);
+        Task<bool> TerritoryExistAsync(int territoryId);
+        Task<bool> AddStore(StoreModel storeModel);
+        Task<bool> UpdateStore(StoreModel storeModel);
+        Task<bool> StoreExistAsync(int storeId);
+        Task<bool> DeleteStore(int storeId);
     }
 }
