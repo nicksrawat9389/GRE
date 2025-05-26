@@ -1,12 +1,16 @@
 ﻿using GRE.Application;
 using GRE.Application.Interfaces.Repository.Product;
 using GRE.Application.Interfaces.Repository.Store;
+using GRE.Application.Interfaces.Repository.User;
 using GRE.Application.Interfaces.Services.Product;
 using GRE.Application.Interfaces.Services.Store;
+using GRE.Application.Interfaces.Services.User;
 using GRE.Persistence.Implementations.Repository.Product;
 using GRE.Persistence.Implementations.Repository.Store;
+using GRE.Persistence.Implementations.Repository.User;
 using GRE.Persistence.Implementations.Services.Product;
 using GRE.Persistence.Implementations.Services.Store;
+using GRE.Persistence.Implementations.Services.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,6 +32,8 @@ namespace GRE.Persistence
             services.AddTransient<IProductService,ProductService>();
             services.AddTransient<IStoreRepository, StoreRepository>();
             services.AddTransient<IStoreService, StoreService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService,UserService>();
             return services;
         }
     }
