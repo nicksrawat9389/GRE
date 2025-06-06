@@ -139,6 +139,29 @@ namespace GRE.Persistence.Implementations.Services.Product
             }
             else
             {
+                if (filterModel.ProductType == "promo")
+                {
+                    for (int i = 0; i < products.Count; i++)
+                    {
+                        // Initialize nested objects if null
+                        if (products[i].ProductPromotion == null)
+                            products[i].ProductPromotion = new ProductPromotionModel();
+
+                        if (products[i].ProductPromotionLimit == null)
+                            products[i].ProductPromotionLimit = new ProductPromotionLimitModel();
+
+                        products[i].ProductPromotion.PromotionId = products[i].PromotionId;
+                        products[i].ProductPromotion.PromoStartDate = products[i].PromoStartDate;
+                        products[i].ProductPromotion.PromoEndDate = products[i].PromoEndDate;
+                        products[i].ProductPromotion.PromoDetails = products[i].PromoDetails;
+
+                        products[i].ProductPromotionLimit.LimitId = products[i].LimitId;
+                        products[i].ProductPromotionLimit.MinQuantity = products[i].MinQuantity;
+                        products[i].ProductPromotionLimit.MaxQuantity = products[i].MaxQuantity;
+                    }
+                }
+
+
                 response.StatusCode = (int)StatusCodeEnum.Success;
                 response.Message = SuccessMessages.ProductFetchedSuccessfully;
                 response.data = products;

@@ -27,13 +27,30 @@ namespace GRE.Domain.Models.Product
         public decimal RetailerPrice { get; set; }
         public decimal DistributorPrice { get; set; }
         public decimal ProductPrice { get; set; }
+
+
         public DateTime DateAdded { get; set; }
 
         public DateTime DateLastUpdated { get; set; }
+
+        public ProductPromotionModel ProductPromotion { get; set; }
+        public ProductPromotionLimitModel ProductPromotionLimit { get; set; }
     }
 
     public class ProductListing : ProductModel
     {
+        public int PromotionId { get; set; }
+        public DateTime PromoStartDate { get; set; }
+
+        public DateTime PromoEndDate { get; set; }
+
+        public string PromoDetails { get; set; }
+        public int LimitId { get; set; }
+
+        public int MinQuantity { get; set; }
+
+        public int MaxQuantity { get; set; }
+
         public int TotalRecords { get; set; }
     }
 }

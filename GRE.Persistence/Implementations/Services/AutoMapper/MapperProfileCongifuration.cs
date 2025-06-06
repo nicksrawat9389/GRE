@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using GRE.Domain.Models.Newsletter;
 using GRE.Domain.Models.Product;
 using GRE.Domain.Models.Store;
 using GRE.Domain.Models.Users;
+using GRE.Shared.DTOs.Newsletter;
 using GRE.Shared.DTOs.Product;
 using GRE.Shared.DTOs.Store;
 using GRE.Shared.DTOs.User;
@@ -21,6 +23,10 @@ namespace GRE.Persistence.Implementations.Services.AutoMapper
             CreateMap<TerritoryDto, TerritoryModel>();
             CreateMap<StoreDto, StoreModel>();
             CreateMap<UsersDto,UserModel>();
+            CreateMap<ProductPromotionDto, ProductPromotionModel>();
+            CreateMap<ProductPromotionLimitDto, ProductPromotionLimitModel>();
+            CreateMap<NewsletterDto, NewsletterModel>();
+
         }
     }
 }

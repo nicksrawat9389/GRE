@@ -21,5 +21,8 @@ namespace GRE.Shared.DTOs.Product
         public string UnitType { get; set; }
         public decimal RetailerPrice { get; set; }
         public decimal DistributorPrice { get; set; }
+
+        public ProductPromotionDto ProductPromotion { get; set; }
+        public ProductPromotionLimitDto ProductPromotionLimit { get; set; }
     }
 }

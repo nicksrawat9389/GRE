@@ -28,5 +28,6 @@ namespace GRE.Shared.Messages
 
 
         public const string UserNotFound = "User not found.";
+        public const string NewsletterNotFound = "Newsletter not found.";
     }
 }

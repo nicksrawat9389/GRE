@@ -32,6 +32,11 @@ namespace GRE.Shared.Messages
         public const string UserAlreadyExist = "User already exists.";
         public const string UserDeletedSuccessfully = "User deleted successfully.";
 
+
+        public const string NewsletterAddedSuccessfully = "Newsletter added successfully.";
+        public const string NewsletterUpdatedSuccessfully = "Newsletter updated successfully.";
+        public const string NewsletterDeletedSuccessfully = "Newsletter Deleted successfully.";
+
     }
 
 }

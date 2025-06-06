@@ -38,7 +38,15 @@ namespace GRE.Persistence.Implementations.Repository.Product
             parameters.Add("@RetailerPrice", product.RetailerPrice, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@DistributorPrice", product.DistributorPrice, DbType.Decimal, ParameterDirection.Input);
 
-            int result = await AddAsync("USP_AddProduct", parameters, CommandType.StoredProcedure);
+
+
+            parameters.Add("@PromoStartDate", product.ProductPromotion.PromoStartDate , DbType.Date, ParameterDirection.Input);
+            parameters.Add("@PromoEndDate", product.ProductPromotion.PromoEndDate, DbType.Date, ParameterDirection.Input);
+            parameters.Add("@PromoDetails", string.IsNullOrEmpty(product.ProductPromotion.PromoDetails) ? (object)DBNull.Value : product.ProductPromotion.PromoDetails, DbType.String, ParameterDirection.Input);
+            parameters.Add("@MinQuantity", product.ProductPromotionLimit.MinQuantity, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@MaxQuantity", product.ProductPromotionLimit.MaxQuantity, DbType.Int32, ParameterDirection.Input);
+
+            int result = await GetFirstOrDefaultAsync<int>("USP_AddProduct", parameters, CommandType.StoredProcedure);
             return result > 0;
         }
 
@@ -55,7 +63,14 @@ namespace GRE.Persistence.Implementations.Repository.Product
             parameters.Add("@IsDeleted", product.IsDeleted);
             parameters.Add("@RetailerPrice", product.RetailerPrice, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@DistributorPrice", product.DistributorPrice, DbType.Decimal, ParameterDirection.Input);
-            var result = await ExecuteAsync(
+
+
+            parameters.Add("@PromoStartDate", product.ProductPromotion.PromoStartDate, DbType.Date, ParameterDirection.Input);
+            parameters.Add("@PromoEndDate", product.ProductPromotion.PromoEndDate, DbType.Date, ParameterDirection.Input);
+            parameters.Add("@PromoDetails", string.IsNullOrEmpty(product.ProductPromotion.PromoDetails) ? (object)DBNull.Value : product.ProductPromotion.PromoDetails, DbType.String, ParameterDirection.Input);
+            parameters.Add("@MinQuantity", product.ProductPromotionLimit.MinQuantity, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@MaxQuantity", product.ProductPromotionLimit.MaxQuantity, DbType.Int32, ParameterDirection.Input);
+            var result = await GetFirstOrDefaultAsync<int>(
                 "USP_UpdateProduct", parameters, commandType: CommandType.StoredProcedure
             );
 
