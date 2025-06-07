@@ -1,6 +1,7 @@
 ﻿using GRE.Application.Interfaces.Services.Newsletter;
 using GRE.Shared.DTOs.Newsletter;
 using GRE.Shared.DTOs.Product;
+using GRE.Shared.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,31 @@ namespace GRE.WebApi.Controllers.Newsletter
             }
 
             return Ok(await _newsletterService.DeleteNewsLetterAsync(newsletterId));
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllNewsLetters([FromBody] FilterModel filterModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _newsletterService.GetAllNewsletterAsync());
+        }
+
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> GetNewsLetterById([FromBody] int newsletterId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _newsletterService.GetNewsletterById(newsletterId));
         }
 
     }

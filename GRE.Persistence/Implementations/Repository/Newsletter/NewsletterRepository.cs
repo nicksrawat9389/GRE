@@ -2,12 +2,8 @@
 using GRE.Application.Interfaces.Repository.Newsletter;
 using GRE.Domain.Models.Newsletter;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GRE.Persistence.Implementations.Repository.Newsletter
 {
@@ -33,7 +29,7 @@ namespace GRE.Persistence.Implementations.Repository.Newsletter
         public async Task<bool> NewsletterExist(int newsletterId)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@NewsletterId", newsletterId, DbType.String, ParameterDirection.Input);
+            parameters.Add("@NewsletterId", newsletterId, DbType.Int32, ParameterDirection.Input);
             bool result = await GetFirstOrDefaultAsync<bool>("USP_CheckNewsletterExist", parameters, CommandType.StoredProcedure);
             return result;
         }
@@ -42,7 +38,7 @@ namespace GRE.Persistence.Implementations.Repository.Newsletter
         {
             
                 var parameters = new DynamicParameters();
-            parameters.Add("@@NewsletterId", newsletter.NewsletterId, DbType.String, ParameterDirection.Input);
+            parameters.Add("@@NewsletterId", newsletter.NewsletterId, DbType.Int32, ParameterDirection.Input);
 
             parameters.Add("@Title", newsletter.Title, DbType.String, ParameterDirection.Input);
             parameters.Add("@PdfFileName", newsletter.PdfName, DbType.String, ParameterDirection.Input);
@@ -54,10 +50,24 @@ namespace GRE.Persistence.Implementations.Repository.Newsletter
         public async Task<bool> DeleteNewsletter(int newsletterId)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@NewsletterId", newsletterId, DbType.String, ParameterDirection.Input);
+            parameters.Add("@NewsletterId", newsletterId, DbType.Int32, ParameterDirection.Input);
             bool result = await GetFirstOrDefaultAsync<bool>("USP_DeleteNewsLetter", parameters, CommandType.StoredProcedure);
             return result;
         }
 
+        public async Task<List<NewsletterModel>> GetAllNewsletters()
+        {
+            var parameters = new DynamicParameters();
+            var result = await QueryAsync<NewsletterModel>("USP_GetAllNewsletters", parameters,commandType:CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<NewsletterModel> GetNewslettersById(int newsLetterId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@NewsletterId", newsLetterId, DbType.Int32, ParameterDirection.Input);
+            var result = await GetAsync<NewsletterModel>("USP_GetNewsetterById", parameters, commandType: CommandType.StoredProcedure);
+            return result;
+        }
     }
 }

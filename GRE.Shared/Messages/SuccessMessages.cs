@@ -35,8 +35,12 @@ namespace GRE.Shared.Messages
 
         public const string NewsletterAddedSuccessfully = "Newsletter added successfully.";
         public const string NewsletterUpdatedSuccessfully = "Newsletter updated successfully.";
-        public const string NewsletterDeletedSuccessfully = "Newsletter Deleted successfully.";
+        public const string NewsletterDeletedSuccessfully = "Newsletter deleted successfully.";
+        public const string NewsletterFetchedSuccessfully = "Newsletter fetched successfully.";
+        public const string NewsletterDownloadedSuccessfully = "Newsletter downloaded successfully.";
 
+        public const string ContactSupportAddedSuccessfully = "Contact support added successfully.";
+        public const string ContactSupportUpdatedSuccessfully = "Contact support updated successfully.";
     }
 
 }

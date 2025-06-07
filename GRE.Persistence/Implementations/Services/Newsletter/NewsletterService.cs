@@ -183,7 +183,75 @@ namespace GRE.Persistence.Implementations.Services.Newsletter
             return response;
 
         }
-            
 
+        public async Task<JsonModel> GetAllNewsletterAsync()
+        {
+            List<NewsletterModel> result = await _newsletterRepository.GetAllNewsletters();
+            List<NewsletterDto> newsletter = new();
+            newsletter = _mapper.Map<List<NewsletterDto>>(result);
+            if (newsletter.Count > 0)
+            {
+                response.data = newsletter;
+                response.StatusCode = (int)StatusCodeEnum.Success;
+                response.Message = SuccessMessages.NewsletterFetchedSuccessfully;
+            }
+            else
+            {
+                response.data = null;
+                response.StatusCode = (int)StatusCodeEnum.NotFound;
+                response.Message = ErrorMessages.NewsletterNotFound;
+            }
+            return response;
+        }
+
+        public async Task<JsonModel> GetNewsletterById(int newsLetterId)
+        {
+            if (newsLetterId != null)
+            {
+                NewsletterModel result = await _newsletterRepository.GetNewslettersById(newsLetterId);
+                if (result != null)
+                {
+                    var fileName = Path.GetFileName($"{result.PdfName}");
+
+                    string folder = Path.Combine(Directory.GetCurrentDirectory(), _configuration["GREDocs:NewsletterPath"]!);
+                    string filePath = Path.Combine(folder, fileName);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+                        string base64String = Convert.ToBase64String(fileBytes);
+
+                        // Use base64String as needed (e.g., send in response)
+                        NewsletterDto newsletter = _mapper.Map<NewsletterDto>(result);
+                        newsletter.PdfBase64 = base64String;
+
+                        response.data = newsletter;
+                        response.StatusCode = (int)StatusCodeEnum.Success;
+                        response.Message = SuccessMessages.NewsletterDownloadedSuccessfully;
+                    }
+                    else
+                    {
+                        // Handle file not found case
+                        response.data = null;
+                        response.StatusCode = (int)StatusCodeEnum.InternalServerError;
+                        response.Message = ErrorMessages.InternalServerError;
+                    }
+                }
+                else
+                {
+                    response.data = null;
+                    response.StatusCode = (int)StatusCodeEnum.NotFound;
+                    response.Message = ErrorMessages.NewsletterNotFound;
+                }
+
+            }
+            else
+            {
+                response.data = null;
+                response.StatusCode = (int)StatusCodeEnum.BadRequest;
+                response.Message = ErrorMessages.DataIsRequired;
+            }
+           
+            return response;
+        }
     }
 }

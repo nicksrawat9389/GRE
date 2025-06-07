@@ -2,15 +2,19 @@
 using GRE.Application.Interfaces.Repository.Newsletter;
 using GRE.Application.Interfaces.Repository.Product;
 using GRE.Application.Interfaces.Repository.Store;
+using GRE.Application.Interfaces.Repository.SupportContact;
 using GRE.Application.Interfaces.Repository.User;
+using GRE.Application.Interfaces.Services.ContactSupport;
 using GRE.Application.Interfaces.Services.Newsletter;
 using GRE.Application.Interfaces.Services.Product;
 using GRE.Application.Interfaces.Services.Store;
 using GRE.Application.Interfaces.Services.User;
+using GRE.Persistence.Implementations.Repository.ContactSupport;
 using GRE.Persistence.Implementations.Repository.Newsletter;
 using GRE.Persistence.Implementations.Repository.Product;
 using GRE.Persistence.Implementations.Repository.Store;
 using GRE.Persistence.Implementations.Repository.User;
+using GRE.Persistence.Implementations.Services.ContactSupport;
 using GRE.Persistence.Implementations.Services.Newsletter;
 using GRE.Persistence.Implementations.Services.Product;
 using GRE.Persistence.Implementations.Services.Store;
@@ -40,6 +44,9 @@ namespace GRE.Persistence
             services.AddTransient<IUserService,UserService>();
             services.AddTransient<INewsletterRepository,NewsletterRepository>();
             services.AddTransient<INewsletterService, NewsletterService>();
+
+            services.AddTransient<IContactSupportRepository, ContactSupportRepository>();
+            services.AddTransient<IContactSupportService,ContactSupportService>();
             return services;
         }
     }

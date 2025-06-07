@@ -13,5 +13,7 @@ namespace GRE.Application.Interfaces.Repository.Newsletter
         Task<bool> UpdateNewsLetter(NewsletterModel newsletter);
         Task<bool> NewsletterExist(int newsletterId);
         Task<bool> DeleteNewsletter(int newsletterId);
+        Task<List<NewsletterModel>> GetAllNewsletters();
+        Task<NewsletterModel> GetNewslettersById(int newsLetterId);
     }
 }

@@ -13,5 +13,7 @@ namespace GRE.Application.Interfaces.Services.Newsletter
         Task<JsonModel> AddNewsLetterAsync(NewsletterDto newsletterDto);
         Task<JsonModel> UpdateNewsLetterAsync(NewsletterDto newsletterDto);
         Task<JsonModel> DeleteNewsLetterAsync(int newsletterId);
+        Task<JsonModel> GetAllNewsletterAsync();
+        Task<JsonModel> GetNewsletterById(int newsLetterId);
     }
 }
